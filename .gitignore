@@ -1,0 +1,23 @@
+node_modules/
+frontend/node_modules/
+
+# Python virtual environments
+.venv/
+venv/
+
+# Environment files and secrets
+.env
+**/.env
+*.env.local
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDE/editor
+.idea/
+.idea.zip
+
+# OS files
+.DS_Store
+Thumbs.db

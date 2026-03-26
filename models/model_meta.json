@@ -1,0 +1,49 @@
+{
+  "model_name": "xgboost",
+  "cv_accuracy": 0.5224,
+  "test_accuracy": 0.4934,
+  "feature_cols": [
+    "home_form_last8",
+    "away_form_last8",
+    "home_goal_avg",
+    "away_goal_avg",
+    "home_conceded_avg",
+    "away_conceded_avg",
+    "home_xg_proxy",
+    "away_xg_proxy",
+    "home_shots_avg",
+    "away_shots_avg",
+    "home_sot_avg",
+    "away_sot_avg",
+    "home_corners_avg",
+    "away_corners_avg",
+    "home_cards_avg",
+    "away_cards_avg",
+    "head_to_head_score",
+    "home_league_position",
+    "away_league_position",
+    "home_home_win_rate",
+    "away_away_win_rate",
+    "home_advantage",
+    "home_strength_score",
+    "away_strength_score",
+    "goal_diff_ratio",
+    "position_diff",
+    "form_diff",
+    "xg_diff"
+  ],
+  "label_map": {
+    "home_win": 0,
+    "draw": 1,
+    "away_win": 2
+  },
+  "version": "3.0.0",
+  "seasons": "2014-15 to 2023-24",
+  "n_features": 28,
+  "all_cv_scores": {
+    "random_forest": 0.5076,
+    "gradient_boosting": 0.5082,
+    "logistic_regression": 0.4898,
+    "xgboost": 0.5224
+  }
+}
