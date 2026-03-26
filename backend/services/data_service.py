@@ -8,7 +8,6 @@ from sqlalchemy.orm import Session
 import numpy as np
 
 from backend.database.db import Team, Match, TeamStat, Prediction
-from backend.ml.feature_engineering import FEATURE_COLS
 
 
 # ────────────────────────────────────────────────────────────

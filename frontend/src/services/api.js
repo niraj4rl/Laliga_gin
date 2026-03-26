@@ -26,7 +26,19 @@ export const fetchTeams             = ()           => api.get('/teams').then(r =
 export const fetchTeam              = (name)       => api.get(`/team/${encodeURIComponent(name)}`).then(r => r.data)
 export const fetchStandings         = ()           => api.get('/live/standings').then(r => r.data)
 export const fetchResults           = ()           => api.get('/live/results').then(r => r.data)
-export const fetchUpcomingPredictions = ()         => api.get('/predict/upcoming', { params: { include_injuries: true } }).then(r => r.data)
+export const fetchUpcomingPredictions = async ()   => {
+  try {
+    const res = await api.get('/predict/upcoming', { params: { include_injuries: true } })
+    return { ...res.data, include_injuries: true }
+  } catch (err) {
+    const status = err.response?.status
+    const shouldFallback = err.code === 'ECONNABORTED' || status === 429 || (status >= 500) || !err.response
+    if (!shouldFallback) throw err
+
+    const res = await api.get('/predict/upcoming', { params: { include_injuries: false } })
+    return { ...res.data, include_injuries: false }
+  }
+}
 export const fetchModelInfo         = ()           => api.get('/model/info').then(r => r.data)
 
 export default api

@@ -5,7 +5,7 @@ Run once: python -m backend.database.seed
 """
 from dotenv import load_dotenv
 import os
-load_dotenv(os.path.join(os.path.dirname(__file__), "../../.env"))
+load_dotenv(os.path.join(os.path.dirname(__file__), "../.env"))
 import random
 import csv
 import os

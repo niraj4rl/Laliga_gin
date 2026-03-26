@@ -10,12 +10,11 @@ Run: python -m backend.ml.train_model
 
 from dotenv import load_dotenv
 import os
-load_dotenv(os.path.join(os.path.dirname(__file__), "../../.env"))
+load_dotenv(os.path.join(os.path.dirname(__file__), "../.env"))
 
 import pickle
 import json
 import numpy as np
-import pandas as pd
 from pathlib import Path
 
 from sklearn.ensemble import (
@@ -35,8 +34,6 @@ except ImportError:
     HAS_XGB = False
     print("⚠  XGBoost not installed. Run: pip install xgboost")
 
-from backend.ml.feature_engineering import load_raw, build_features, FEATURE_COLS
-
 MODELS_DIR = Path(__file__).resolve().parents[2] / "models"
 MODELS_DIR.mkdir(exist_ok=True)
 MODEL_PATH = MODELS_DIR / "match_predictor.pkl"
@@ -47,6 +44,9 @@ LABEL_INV = {v: k for k, v in LABEL_MAP.items()}
 
 
 def train():
+    # Import training-only dependencies lazily so API inference startup stays lightweight.
+    from backend.ml.feature_engineering import load_raw, build_features, FEATURE_COLS
+
     print("📂  Loading raw data …")
     raw = load_raw()
     print(f"    {len(raw)} matches across {raw['season'].nunique()} seasons")
