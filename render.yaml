@@ -20,6 +20,6 @@ services:
       - key: UPCOMING_MATCH_LIMIT
         value: "5"
       - key: PYTHON_VERSION
-        value: 3.12.7
+        value: "3.12.7"
       - key: FRONTEND_URL
         sync: false
