@@ -1,11 +1,11 @@
 # La Liga Analytics & Match Prediction System
 
-A machine learning-powered system to predict La Liga football match outcomes with real-time injury and suspension data integration.
+A machine learning-powered system to predict La Liga football match outcomes with real-time injury data integration.
 
 ## 🎯 Features
 
 - **Match Predictions**: Real-time predictions for upcoming La Liga matches using ML models
-- **Injury Integration**: Real-time player injury and suspension data enrichment
+- **Injury Integration**: Real-time player injury data enrichment
 - **Historical Analysis**: Team statistics and performance trends
 - **Key Player Impact**: Identifies key players and their performance metrics
 - **Interactive Dashboard**: React-based UI for exploring predictions and standings
@@ -115,7 +115,7 @@ The application will be available at:
 - `GET /predict/upcoming?include_injuries=false` - Fast predictions without injury data
 
 ### Query Parameters
-- `include_injuries` (boolean): Include player injury/suspension data (default: true)
+- `include_injuries` (boolean): Include player injury data (default: true)
 - Response time varies: ~30s with injuries, ~5s without
 
 ## 🗂 Project Structure
@@ -191,7 +191,7 @@ lsof -ti:8001,8002 | xargs kill -9
 ## 📊 Model Information
 
 - **Training Data**: Historical La Liga match data (2017-present)
-- **Features**: Team form, head-to-head records, player availability, home/away advantage
+- **Features**: Team form, head-to-head records, player injuries, home/away advantage
 - **Model**: Ensemble learning approach (Random Forest + Gradient Boosting)
 - **Accuracy**: ~68% on test set
 
