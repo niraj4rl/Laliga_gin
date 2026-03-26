@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: laliga-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.api.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /docs
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: FOOTBALL_API_KEY
+        sync: false
+      - key: RAPIDAPI_KEY
+        sync: false
+      - key: APIFOOTBALL_API_KEY
+        sync: false
+      - key: ENABLE_INJURY_LOOKUP
+        value: "1"
+      - key: UPCOMING_MATCH_LIMIT
+        value: "5"
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: FRONTEND_URL
+        sync: false

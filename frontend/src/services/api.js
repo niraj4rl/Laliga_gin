@@ -1,8 +1,10 @@
 import axios from 'axios'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001'
+
 const api = axios.create({
-  baseURL: 'http://localhost:8001',
-  timeout: 30000,
+  baseURL: API_BASE_URL,
+  timeout: 90000,
 })
 
 // Auto retry on 429 rate limit
@@ -24,7 +26,7 @@ export const fetchTeams             = ()           => api.get('/teams').then(r =
 export const fetchTeam              = (name)       => api.get(`/team/${encodeURIComponent(name)}`).then(r => r.data)
 export const fetchStandings         = ()           => api.get('/live/standings').then(r => r.data)
 export const fetchResults           = ()           => api.get('/live/results').then(r => r.data)
-export const fetchUpcomingPredictions = ()         => api.get('/predict/upcoming').then(r => r.data)
+export const fetchUpcomingPredictions = ()         => api.get('/predict/upcoming', { params: { include_injuries: true } }).then(r => r.data)
 export const fetchModelInfo         = ()           => api.get('/model/info').then(r => r.data)
 
 export default api

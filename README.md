@@ -188,6 +188,41 @@ Get-NetTCPConnection -LocalPort 8001,8002 -State Listen | Stop-Process -Force
 lsof -ti:8001,8002 | xargs kill -9
 ```
 
+## ☁️ Deployment
+
+This project is ready to deploy with:
+- **Backend** on Render
+- **Frontend** on Vercel
+
+### Backend (Render)
+
+1. Go to Render and create a **Web Service** from this GitHub repo.
+2. Render will detect `render.yaml` automatically.
+3. Set required environment variables in Render:
+	- `DATABASE_URL`
+	- `FOOTBALL_API_KEY`
+4. Optional variables:
+	- `RAPIDAPI_KEY`
+	- `APIFOOTBALL_API_KEY`
+	- `ENABLE_INJURY_LOOKUP` (`1` or `0`)
+	- `UPCOMING_MATCH_LIMIT`
+5. Deploy and copy your backend URL (example: `https://laliga-api.onrender.com`).
+
+### Frontend (Vercel)
+
+1. Import the same repo in Vercel.
+2. Vercel will use `vercel.json` from project root.
+3. Add env var in Vercel project settings:
+	- `VITE_API_BASE_URL=https://<your-render-backend-url>`
+4. Deploy.
+
+### Final Production CORS Step
+
+After frontend is deployed, add this variable in Render backend:
+- `FRONTEND_URL=https://<your-vercel-domain>`
+
+Then redeploy backend once so CORS allows your live frontend domain.
+
 ## 📊 Model Information
 
 - **Training Data**: Historical La Liga match data (2017-present)
