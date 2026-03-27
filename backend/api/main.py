@@ -32,6 +32,7 @@ _default_cors = [
     "http://localhost:3001",
     "http://localhost:5173",
     "http://127.0.0.1:3000",
+    "https://laliga-gin.vercel.app",
 ]
 _cors_from_env = os.getenv("CORS_ORIGINS", "")
 if _cors_from_env.strip():
