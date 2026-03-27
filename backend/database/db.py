@@ -7,20 +7,43 @@ from sqlalchemy import (
     create_engine, Column, Integer, String, Float, Date,
     ForeignKey, DateTime, CheckConstraint, UniqueConstraint, Index, text
 )
+from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from sqlalchemy.sql import func
 import os
 from pathlib import Path
+from urllib.parse import quote_plus
 
 from dotenv import load_dotenv
 
 # Load backend/.env reliably regardless of current working directory.
 load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql://postgres:postgres@localhost:5432/laliga_analytics",
-)
+def _build_database_url() -> str:
+    database_url = os.getenv("DATABASE_URL", "").strip()
+    if database_url:
+        return database_url
+
+    # Support split DB_* variables for local dev if DATABASE_URL is not provided.
+    db_user = os.getenv("DB_USER", "postgres").strip() or "postgres"
+    db_password = os.getenv("DB_PASSWORD", "").strip()
+    db_host = os.getenv("DB_HOST", "localhost").strip() or "localhost"
+    db_port = os.getenv("DB_PORT", "5432").strip() or "5432"
+    db_name = os.getenv("DB_NAME", "laliga_analytics").strip() or "laliga_analytics"
+
+    if not db_password:
+        raise RuntimeError(
+            "Database is not configured. Set DATABASE_URL in backend/.env "
+            "or provide DB_PASSWORD (optionally DB_USER, DB_HOST, DB_PORT, DB_NAME)."
+        )
+
+    return (
+        f"postgresql://{db_user}:{quote_plus(db_password)}@"
+        f"{db_host}:{db_port}/{db_name}"
+    )
+
+
+DATABASE_URL = _build_database_url()
 
 
 engine = create_engine(DATABASE_URL, pool_pre_ping=True, echo=False)
@@ -158,4 +181,10 @@ def get_db():
 
 def init_db():
     """Create all tables (run once on first start)."""
-    Base.metadata.create_all(bind=engine)
+    try:
+        Base.metadata.create_all(bind=engine)
+    except OperationalError as exc:
+        raise RuntimeError(
+            "Database connection failed. Verify PostgreSQL is running and your "
+            "DATABASE_URL/DB_* credentials in backend/.env are correct."
+        ) from exc
