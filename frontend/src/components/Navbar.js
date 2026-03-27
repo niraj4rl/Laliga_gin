@@ -24,14 +24,14 @@ export default function Navbar() {
         <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 9 }}>
           <div style={{
             width: 26, height: 26,
-            border: '1px solid rgba(34,211,238,0.35)', borderRadius: 3,
+            border: '1px solid rgba(255,255,255,0.35)', borderRadius: 3,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: 'rgba(34,211,238,0.06)',
+            background: 'rgba(255,255,255,0.06)',
           }}>
-            <span style={{ color: 'var(--cyan)', fontSize: 8, fontWeight: 900, fontFamily: 'monospace' }}>GIN</span>
+            <span style={{ color: '#ffffff', fontSize: 8, fontWeight: 900, fontFamily: 'monospace' }}>GIN</span>
           </div>
           <span style={{ color: '#ffffff', fontSize: '0.9rem', fontWeight: 700, letterSpacing: '0.04em' }}>
-            LaLiga<span style={{ color: 'var(--cyan)' }}>GIN</span>
+            laliga<span style={{ color: 'rgba(255,255,255,0.75)' }}>Gin</span>
           </span>
         </Link>
 
