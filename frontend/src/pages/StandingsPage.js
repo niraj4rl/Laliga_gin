@@ -20,7 +20,7 @@ export default function StandingsPage() {
       <div style={{ maxWidth:900, margin:'0 auto', padding:'40px 24px' }}>
 
         <div className="fade-up" style={{ marginBottom:28 }}>
-          <span className="section-label">// Live Standings · 2024/25 Season</span>
+          <span className="section-label">// Live Standings · 2025/26 Season</span>
           <h1 style={{ fontSize:'2rem', fontWeight:800, color:'#ffffff', letterSpacing:'-0.02em' }}>
             La Liga Table
           </h1>

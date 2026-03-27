@@ -18,7 +18,7 @@ export default function ResultsPage() {
       <div style={{ maxWidth:800, margin:'0 auto', padding:'40px 24px' }}>
 
         <div className="fade-up" style={{ marginBottom:28 }}>
-          <span className="section-label">// Recent Results · 2024/25 Season</span>
+          <span className="section-label">// Recent Results · 2025/26 Season</span>
           <h1 style={{ fontSize:'2rem', fontWeight:800, color:'#ffffff', letterSpacing:'-0.02em' }}>
             Latest Results
           </h1>
